@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
@@ -140,3 +139,4 @@ if st.sidebar.button('Predict Drug Type'):
     "This application is intended for educational and research demonstration "
     "purposes only."
     )
+
