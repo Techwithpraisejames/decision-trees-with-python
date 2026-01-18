@@ -8,9 +8,8 @@ st.set_page_config(layout="wide")
 st.title('Drug Type Prediction App')
 st.write('This app predicts the appropriate drug type based on patient characteristics.')
 
-
-csv_file_path = "C:\\Users\\HP-PC\\Downloads\\drug200.csv"
-drug_prediction_df = pd.read_csv(csv_file_path, encoding='latin1')
+csv_file_path = "data/drug200.csv"
+drug_prediction_df = pd.read_csv(csv_file_path)
 
 # Initialize LabelEncoders for each categorical column and the target
 # We'll need separate encoders to map inputs and decode outputs correctly
@@ -75,4 +74,5 @@ if st.sidebar.button('Predict Drug Type'):
     "This application is intended for educational and research demonstration "
     "purposes only."
     )
+
 
