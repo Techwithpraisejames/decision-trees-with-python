@@ -52,8 +52,6 @@ bp_encoded = bp_encoder.transform([bp_str])[0]
 cholesterol_encoded = cholesterol_encoder.transform([cholesterol_str])[0]
 
 # Prediction Section
-st.markdown("## Prediction")
-
 if st.button("Predict Drug Type"):
     input_data = pd.DataFrame(
         [
@@ -68,9 +66,7 @@ if st.button("Predict Drug Type"):
     )
 
     prediction_encoded = decision_tree.predict(input_data)
-    prediction_drug_name = drug_encoder.inverse_transform(
-        prediction_encoded
-    )[0]
+    prediction_drug_name = drug_encoder.inverse_transform(prediction_encoded)[0]
 
     st.subheader('Prediction Result:')
     st.success(
@@ -84,3 +80,4 @@ if st.button("Predict Drug Type"):
         "This application is intended for educational and research demonstration "
         "purposes only."
     )
+
