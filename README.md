@@ -22,3 +22,5 @@ The model achieved perfect scores (1.00) for precision, recall, and F1-score acr
 
 ## Warning
 This model is for educational purposes only and should not be used for real-world medical decision-making.
+
+### You can now interact with the decision tree project via Streamlit
