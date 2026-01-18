@@ -23,4 +23,8 @@ The model achieved perfect scores (1.00) for precision, recall, and F1-score acr
 ## Warning
 This model is for educational purposes only and should not be used for real-world medical decision-making.
 
-### You can now interact with the decision tree project via Streamlit
+### Live Demo (Streamlit App)
+This project has been deployed as an interactive Streamlit web application. You can explore the model by entering patient characteristics (age, blood pressure, cholesterol level, and Na_to_K ratio)
+
+👉 Try the live app here:
+https://drug-predictor-with-decision-tree.streamlit.app/
