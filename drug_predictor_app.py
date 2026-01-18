@@ -1,7 +1,7 @@
 
 import streamlit as st
 import pandas as pd
-from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import LabelEncoder
 
 st.set_page_config(layout="wide")
@@ -34,6 +34,62 @@ y = data_processed[['Drug']]
 decision_tree = DecisionTreeClassifier(random_state=42)
 decision_tree.fit(X, y)
 
+# Function to explain prediction logic
+def explain_prediction(age, bp_encoded, cholesterol_encoded, na_to_k):
+    explanations = []
+
+    # Root split
+    if na_to_k > 14.829:
+        explanations.append(
+            "The sodium-to-potassium (Na_to_K) ratio is high."
+            "Previous patients with high Na_to_K frequently responded to Drug Y."
+        )
+    else:
+        explanations.append(
+            "The sodium-to-potassium (Na_to_K) ratio is relatively low, so the model "
+            "considered additional patient factors."
+        )
+ # Blood pressure
+        if bp_encoded <= 0.5:
+            explanations.append(
+                "Blood pressure falls into a lower category, shifting the decision "
+                "toward age-based treatment patterns."
+            )
+
+            if age <= 50.5:
+                explanations.append(
+                    "Younger patients with low blood pressure most frequently "
+                    "responded to Drug A."
+                )
+            else:
+                explanations.append(
+                    "Older patients with low blood pressure most frequently "
+                    "responded to Drug B."
+                )
+        else:
+            explanations.append(
+                "Blood pressure is elevated, which increases cardiovascular risk "
+                "and narrows treatment options."
+            )
+
+            if bp_encoded > 1.5:
+                explanations.append(
+                    "Very high blood pressure was strongly associated with Drug X "
+                )
+            else:
+                if cholesterol_encoded <= 0.5:
+                    explanations.append(
+                        "Normal cholesterol combined with moderate blood pressure "
+                        "is most commonly associated with Drug C."
+                    )
+                else:
+                    explanations.append(
+                        "High cholesterol combined with elevated blood pressure "
+                        "is most commonly associated with Drug X."
+                    )
+
+    return explanations
+
 # --- Streamlit Sidebar for User Input ---
 st.sidebar.header('Input Patient Characteristics')
 
@@ -52,7 +108,7 @@ cholesterol_encoded = cholesterol_encoder.transform([selected_cholesterol_str])[
 
 na_to_k = st.sidebar.slider('Na_to_K Ratio', min_value=5.0, max_value=38.0, value=15.0, step=0.1)
 
-# --- Prediction ----
+# Prediction Section
 if st.sidebar.button('Predict Drug Type'):
     input_data = pd.DataFrame([{
         'Age': age,
@@ -67,3 +123,20 @@ if st.sidebar.button('Predict Drug Type'):
 
     st.subheader('Prediction Result:')
     st.success(f'Based on the input characteristics, the predicted drug type is: **{prediction_drug_name}**')
+
+# Explanation section
+    st.subheader("Why this drug was selected")
+    explanation_steps = explain_prediction(
+        age, bp_encoded, cholesterol_encoded, na_to_k
+    )
+
+    for step in explanation_steps:
+        st.write(f"- {step}")
+
+# Disclaimer Section
+    st.markdown("---")
+    st.subheader("Important Disclaimer")
+    st.info(
+    "This application is intended for educational and research demonstration "
+    "purposes only."
+    )
