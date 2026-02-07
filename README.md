@@ -2,7 +2,7 @@
 Learn how to build a decision tree classifier that determines which drug might be appropriate for a future patient with the same illness. 
 
 ## Project Overview
-This project uses a Decision Tree Classifier to predict which drug a patient is likely to respond to based on demographic and clinical features such as age, sex, blood pressure, and cholesterol levels. The model is trained on a small Kaggle dataset (https://www.kaggle.com/datasets/pablomgomez21/drugs-a-b-c-x-y-for-decision-trees) and evaluated using standard classification metrics. The goal is to demonstrate how decision trees can be applied to interpretable, rule-based medical decision support systems.
+This project uses a Decision Tree Classifier to predict which drug a patient is likely to respond to based on demographic and clinical features such as age, sex, blood pressure, and cholesterol levels. The model is trained on a Kaggle dataset (https://www.kaggle.com/datasets/pablomgomez21/drugs-a-b-c-x-y-for-decision-trees) and evaluated using standard classification metrics. The goal is to demonstrate how decision trees can be applied to interpretable, rule-based medical decision support systems.
 
 ## Dataset Description
 **Features**
